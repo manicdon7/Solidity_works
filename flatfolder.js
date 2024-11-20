@@ -2,8 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-// Configuration
-const apiKey = 'API_KEY'; // Your Etherscan API Key
+const apiKey = 'API_KEY'; 
 const contractAddress = 'CONTRACT_ADDRESS'; // Contract Address
 const outputDir = `contracts_${contractAddress}`; // Output directory
 
