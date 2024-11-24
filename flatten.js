@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const apiKey = 'API_KEY';
 const contractAddress = 'CONTRACT_ADDRESS';
-const solidityVersion = '^0.8.0'; // Set the desired Solidity version
+const solidityVersion = '^0.8.0';
 
 async function fetchContractSource() {
   const url = `https://api.etherscan.io/api?module=contract&action=getsourcecode&address=${contractAddress}&apikey=${apiKey}`;
@@ -36,8 +36,7 @@ async function resolveImports(content, dir) {
   let result = "";
 
   for (let line of lines) {
-    if (line.trim().startsWith("pragma solidity")) {
-      // Skip pragma solidity lines to avoid conflicts
+    if (line.trim().startsWith("pragma solidity")) ;
       continue;
     }
 
