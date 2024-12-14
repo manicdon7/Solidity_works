@@ -44,7 +44,6 @@ async function resolveImports(content, dir) {
       let importPath = line.match(/"(.*)"/)[1];
       let absolutePath = path.resolve(dir, importPath);
 
-      // Adjust import path for standard libraries like OpenZeppelin
       if (importPath.startsWith('@')) {
         absolutePath = path.resolve(`node_modules/${importPath}`);
       }
