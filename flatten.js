@@ -34,12 +34,10 @@ async function fetchContractSource() {
 async function resolveImports(content, dir) {
   let lines = content.split('\n');
   let result = "";
-
   for (let line of lines) {
     if (line.trim().startsWith("pragma solidity")) ;
       continue;
     }
-
     if (line.trim().startsWith("import")) {
       let importPath = line.match(/"(.*)"/)[1];
       let absolutePath = path.resolve(dir, importPath);
@@ -48,7 +46,6 @@ async function resolveImports(content, dir) {
         absolutePath = path.resolve(`node_modules/${importPath}`);
       }
 
-      // Fetch from GitHub if not found locally
       if (!fs.existsSync(absolutePath)) {
         const githubUrl = `https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/master/${importPath.replace('@openzeppelin/', '')}`;
         try {
@@ -66,7 +63,7 @@ async function resolveImports(content, dir) {
         result += await resolveImports(importContent, path.dirname(absolutePath));
       } catch (error) {
         console.error(`Error resolving import: ${importPath}`, error);
-        continue; // Skip this import if it can't be resolved
+        continue;
       }
     } else {
       result += line + '\n';
